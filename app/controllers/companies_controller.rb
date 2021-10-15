@@ -1,14 +1,5 @@
 class CompaniesController < ApplicationController
-  before_action :set_company, only: [:show, :update, :destroy]
-  after_action :assign_user_roles, only: [:create]
-
-  def assign_user_roles
-    # Roles for the company
-    %w(show update destroy).each do |action|
-      company_role = Role.create name: "company.#{action}", entity_id: @company.id
-      current_user.assignments.create({role_id: company_role.id})
-    end
-  end
+  before_action :authenticate_user!, :set_company, only: [:show, :update, :destroy]
 
   # GET /companies
   def index
@@ -56,6 +47,6 @@ class CompaniesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def company_params
-      params.require(:company).permit(:description, :string)
+      params.require(:company).permit(:description)
     end
 end

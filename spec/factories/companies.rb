@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :company do
-    description { "Flib" }
+    description { "MyString" }
   end
 end
