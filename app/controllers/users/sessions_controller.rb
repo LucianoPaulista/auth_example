@@ -1,10 +1,14 @@
 class Users::SessionsController < Devise::SessionsController
   respond_to :json
 
+  def create
+    super { |resource| @resource = resource }
+  end
+
   private
 
   def respond_with(resource, _opts = {})
-    render json: { message: 'Você está logado!!!' }, status: :ok
+    render json: { message: 'Você está logado Session Controller!!!' }, status: :ok
   end
 
 
