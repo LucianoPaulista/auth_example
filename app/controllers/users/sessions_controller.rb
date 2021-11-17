@@ -8,7 +8,7 @@ class Users::SessionsController < Devise::SessionsController
   private
 
   def respond_with(resource, _opts = {})
-    render json: { message: 'Você está logado Session Controller!!!' }, status: :ok
+    render json: { message: "Você não está autenticado!!!"  }, status: :unauthorized
   end
 
 

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :products
   resources :companies
   devise_for :users,
              defaults: {format: :json},
