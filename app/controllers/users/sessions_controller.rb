@@ -1,8 +1,11 @@
 class Users::SessionsController < Devise::SessionsController
   respond_to :json
-
   def create
     super { |resource| @resource = resource }
+  end
+
+  def show
+    render json: {message: 'retorno de message'}
   end
 
   private

@@ -1,8 +1,12 @@
 class User < ApplicationRecord
+  include Rails.application.routes.url_helpers
+
   devise :database_authenticatable,
          :jwt_authenticatable,
          :registerable,
          jwt_revocation_strategy: JwtDenylist
+
+  has_one_attached :avatar
 
   has_many :assignments
   has_many :user_companies
@@ -19,4 +23,10 @@ class User < ApplicationRecord
       roles.any? {|r| r.name.to_sym == role}
     end
   end
+
+  def image_url
+    #Get the URL of the associated image
+    avatar.attached? ? url_for(avatar) : nil
+  end
+
 end
